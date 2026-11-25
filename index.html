@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест: Теңбүйірлі үшбұрыш және оның қасиеттері — 7Ә</title>
+<style>
+  :root{
+    --ink:#1f2933; --muted:#5f6b7a; --line:#d6dbe1; --bg:#f6f7f9; --paper:#ffffff;
+    --accent:#1f3a5f; --accent-soft:#e8eef5; --ok:#2f6b3a; --bad:#9b2c2c; --warn:#8a5a00;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Times New Roman",Georgia,serif;font-size:18px;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 16px 48px}
+  .paper{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:28px 32px}
+  h1{font-size:26px;margin:0 0 4px;color:var(--accent);font-weight:bold;text-align:center}
+  h2{font-size:20px;margin:0 0 18px;text-align:center;font-weight:normal}
+  .meta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin:16px 0 20px}
+  .meta div{margin:3px 0}
+  .meta b{display:inline-block;min-width:150px}
+  label.f{display:block;font-weight:bold;margin:14px 0 6px}
+  input[type=text],select{width:100%;padding:10px 12px;font-size:17px;font-family:inherit;border:1px solid #aab3bd;border-radius:4px;background:#fff;color:var(--ink)}
+  input[type=text]:focus,select:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+  .rules{font-size:16px;color:var(--muted);background:#fafbfc;border-left:3px solid var(--accent);padding:10px 14px;margin:20px 0}
+  .rules ul{margin:4px 0;padding-left:20px}
+  .btn{display:inline-block;padding:11px 30px;font-size:17px;font-family:inherit;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;cursor:pointer}
+  .btn:disabled{background:#b9c2cc;border-color:#b9c2cc;cursor:not-allowed}
+  .btn.sec{background:#fff;color:var(--accent)}
+  .right{text-align:right;margin-top:22px}
+  .center{text-align:center}
+  .hidden{display:none !important}
+
+  .qhead{display:flex;justify-content:space-between;align-items:center;font-size:16px;color:var(--muted);margin-bottom:8px}
+  .timer{font-family:"Courier New",monospace;font-size:20px;color:var(--ink);border:1px solid var(--line);padding:2px 10px;border-radius:4px}
+  .timer.low{color:var(--bad);border-color:var(--bad)}
+  .bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:22px}
+  .bar i{display:block;height:100%;background:var(--accent);width:0}
+  .qtext{font-size:19px;margin:0 0 14px}
+  .qtext .num{font-weight:bold;color:var(--accent)}
+  .fig{text-align:center;margin:10px 0 16px}
+  .fig svg{max-width:100%;height:auto}
+  .opts{list-style:none;padding:0;margin:0}
+  .opts li{margin:8px 0}
+  .opts label{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;border:1px solid var(--line);border-radius:4px;cursor:pointer}
+  .opts label:hover{background:#fafbfc}
+  .opts input{margin-top:6px}
+  .opts input:checked + span{font-weight:bold}
+  .opts label.sel{border-color:var(--accent);background:var(--accent-soft)}
+  .letter{font-weight:bold;min-width:22px}
+  .numin{display:flex;gap:10px;align-items:center;margin-top:8px}
+  .numin input{max-width:220px}
+  .hint{font-size:15px;color:var(--muted)}
+
+  .modal{position:fixed;inset:0;background:rgba(20,28,38,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
+  .modal .box{background:#fff;max-width:480px;border-radius:6px;border-top:4px solid var(--warn);padding:22px 24px}
+  .modal h3{margin:0 0 10px;color:var(--warn)}
+
+  table.res{width:100%;border-collapse:collapse;margin:16px 0;font-size:16px}
+  table.res th,table.res td{border:1px solid var(--line);padding:6px 10px;text-align:center}
+  table.res th{background:#fafbfc}
+  .ok{color:var(--ok);font-weight:bold}
+  .bad{color:var(--bad);font-weight:bold}
+  .score{font-size:40px;color:var(--accent);text-align:center;margin:6px 0}
+  .status{font-size:15px;color:var(--muted);text-align:center}
+  @media (max-width:560px){.paper{padding:20px 16px}.meta b{min-width:0;display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- БАСТАПҚЫ БЕТ -->
+  <section id="start" class="paper">
+    <h1>Тест</h1>
+    <h2>«Теңбүйірлі үшбұрыш және оның қасиеттері»</h2>
+    <div class="meta">
+      <div><b>Пән:</b> Геометрия</div>
+      <div><b>Оқу мақсаты:</b> 7.1.1.23 теңбүйірлі үшбұрыштың қасиеттері мен белгілерін қолдану</div>
+      <div><b>Мұғалім:</b> учитель математики – Кунгозин Даулет Багдашұлы</div>
+    </div>
+
+    <label class="f" for="fio">Аты-жөніңіз (ФИ)</label>
+    <input type="text" id="fio" placeholder="Введите ФИ" autocomplete="off">
+
+    <label class="f" for="cls">Сынып</label>
+    <select id="cls">
+      <option value="">— сыныпты таңдаңыз —</option>
+      <option value="7Ә">7Ә</option>
+    </select>
+
+    <label class="f" for="variant">Нұсқа</label>
+    <select id="variant">
+      <option value="">— нұсқаны таңдаңыз —</option>
+      <option value="1">1-нұсқа</option>
+      <option value="2">2-нұсқа</option>
+    </select>
+
+    <div class="rules">
+      <b>Тест ережесі:</b>
+      <ul>
+        <li>Тест 10 сұрақтан тұрады: 8 сұрақта бір дұрыс жауапты таңдайсыз, 2 сұраққа сан енгізесіз.</li>
+        <li>Әр сұраққа 3 минут беріледі. Уақыт біткенде келесі сұраққа автоматты түрде өтеді.</li>
+        <li>Әр дұрыс жауап – 1 балл. Ең жоғары балл – 10.</li>
+        <li>Тест кезінде бетті (вкладканы) жиыстыруға немесе ауыстыруға болмайды – бұл жағдайда бағаңыз 1 балға төмендетіледі.</li>
+      </ul>
+    </div>
+
+    <div class="right"><button class="btn" id="btnStart" disabled>Келесі</button></div>
+  </section>
+
+  <!-- СҰРАҚ БЕТІ -->
+  <section id="quiz" class="paper hidden">
+    <div class="qhead">
+      <span id="qcount">Сұрақ 1 / 10</span>
+      <span>Қалған уақыт: <span class="timer" id="timer">03:00</span></span>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+    <div id="qbody"></div>
+    <div class="right"><button class="btn" id="btnNext" disabled>Келесі</button></div>
+  </section>
+
+  <!-- НӘТИЖЕ -->
+  <section id="result" class="paper hidden">
+    <h1>Тест аяқталды</h1>
+    <h2 id="rname"></h2>
+    <div class="score" id="rscore"></div>
+    <div class="center" id="rnote"></div>
+    <table class="res" id="rtable"></table>
+    <div class="status" id="rstatus">Нәтиже жіберілуде…</div>
+  </section>
+</div>
+
+<!-- ЕСКЕРТУ -->
+<div class="modal hidden" id="warn">
+  <div class="box">
+    <h3>Ескерту!</h3>
+    <p>Сіз тест кезінде бетті (вкладканы) жиыстырдыңыз немесе басқа бетке өттіңіз.
+       Бетті жиыстырған жағдайда <b>бағаңыз 1 балға төмендетіледі</b>.</p>
+    <p>Жиыстыру саны: <b id="warnCount">1</b>. Тест жалғасады.</p>
+    <div class="right"><button class="btn" id="warnOk">Түсіндім, жалғастыру</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== БАПТАУ: Apps Script веб-қосымшасының URL-ін осында қойыңыз ===== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpX4mxPa7bBL7fo0rJDMw53duy3Qk8i_dYmfSZPN982lvNN9EyDkOuN0dA8cQI8xJBXQ/exec";
+const TIME_PER_Q = 180; // секунд
+
+/* ===================== SVG КӨМЕКШІ ФУНКЦИЯЛАР ===================== */
+const FONT = 'font-family="Times New Roman,serif"';
+
+// Координаталық тор: w,h — осьтердегі ең үлкен мәндер, pts — нүктелер
+function gridFig(o){
+  const u=38, ml=34, mr=26, mt=22, mb=30;
+  const W=ml+o.w*u+mr, H=mt+o.h*u+mb;
+  const X=x=>ml+x*u, Y=y=>mt+(o.h-y)*u;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
+  // тор
+  for(let i=0;i<=o.w;i++) s+=`<line x1="${X(i)}" y1="${Y(0)}" x2="${X(i)}" y2="${Y(o.h)}" stroke="#d9dee4" stroke-width="1"/>`;
+  for(let j=0;j<=o.h;j++) s+=`<line x1="${X(0)}" y1="${Y(j)}" x2="${X(o.w)}" y2="${Y(j)}" stroke="#d9dee4" stroke-width="1"/>`;
+  // осьтер
+  s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(o.w)+16}" y2="${Y(0)}" stroke="#333" stroke-width="1.6"/>`;
+  s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(o.h)-16}" stroke="#333" stroke-width="1.6"/>`;
+  s+=`<polygon points="${X(o.w)+20},${Y(0)} ${X(o.w)+11},${Y(0)-4} ${X(o.w)+11},${Y(0)+4}" fill="#333"/>`;
+  s+=`<polygon points="${X(0)},${Y(o.h)-20} ${X(0)-4},${Y(o.h)-11} ${X(0)+4},${Y(o.h)-11}" fill="#333"/>`;
+  s+=`<text x="${X(o.w)+12}" y="${Y(0)+20}" font-size="15" font-style="italic" ${FONT}>x</text>`;
+  s+=`<text x="${X(0)+8}" y="${Y(o.h)-8}" font-size="15" font-style="italic" ${FONT}>y</text>`;
+  // сандар
+  for(let i=1;i<=o.w;i++){
+    s+=`<line x1="${X(i)}" y1="${Y(0)-3}" x2="${X(i)}" y2="${Y(0)+3}" stroke="#333"/>`;
+    s+=`<text x="${X(i)}" y="${Y(0)+18}" font-size="13" text-anchor="middle" ${FONT}>${i}</text>`;
+  }
+  for(let j=1;j<=o.h;j++){
+    s+=`<line x1="${X(0)-3}" y1="${Y(j)}" x2="${X(0)+3}" y2="${Y(j)}" stroke="#333"/>`;
+    s+=`<text x="${X(0)-8}" y="${Y(j)+4}" font-size="13" text-anchor="end" ${FONT}>${j}</text>`;
+  }
+  s+=`<text x="${X(0)-8}" y="${Y(0)+18}" font-size="13" text-anchor="end" ${FONT}>0</text>`;
+  // көпбұрыш
+  if(o.poly){
+    const p=o.poly.map(k=>`${X(o.pts[k][0])},${Y(o.pts[k][1])}`).join(' ');
+    s+=`<polygon points="${p}" fill="rgba(31,58,95,0.06)" stroke="#1f3a5f" stroke-width="2.2"/>`;
+  }
+  (o.dash||[]).forEach(([a,b])=>{
+    s+=`<line x1="${X(o.pts[a][0])}" y1="${Y(o.pts[a][1])}" x2="${X(o.pts[b][0])}" y2="${Y(o.pts[b][1])}" stroke="#1f3a5f" stroke-width="1.6" stroke-dasharray="6 4"/>`;
+  });
+  // тік бұрыш белгісі: [төбе, бағыт1, бағыт2]
+  (o.right||[]).forEach(([v,a,b])=>{
+    const P=[X(o.pts[v][0]),Y(o.pts[v][1])], A=[X(o.pts[a][0]),Y(o.pts[a][1])], B=[X(o.pts[b][0]),Y(o.pts[b][1])];
+    const ua=unit(P,A), ub=unit(P,B), r=11;
+    const p1=[P[0]+ua[0]*r,P[1]+ua[1]*r], p3=[P[0]+ub[0]*r,P[1]+ub[1]*r], p2=[p1[0]+ub[0]*r,p1[1]+ub[1]*r];
+    s+=`<polyline points="${p1} ${p2} ${p3}" fill="none" stroke="#1f3a5f" stroke-width="1.3"/>`;
+  });
+  // нүктелер мен белгілер
+  const keys=Object.keys(o.pts);
+  const cx=o.poly? o.poly.reduce((t,k)=>t+o.pts[k][0],0)/o.poly.length : o.w/2;
+  const cy=o.poly? o.poly.reduce((t,k)=>t+o.pts[k][1],0)/o.poly.length : o.h/2;
+  keys.forEach(k=>{
+    const [x,y]=o.pts[k];
+    let dx=x-cx, dy=y-cy, L=Math.hypot(dx,dy)||1; dx/=L; dy/=L;
+    if(o.lab && o.lab[k]){dx=o.lab[k][0];dy=o.lab[k][1];}
+    s+=`<circle cx="${X(x)}" cy="${Y(y)}" r="3.6" fill="#1f3a5f"/>`;
+    s+=`<text x="${X(x)+dx*17}" y="${Y(y)-dy*17+5}" font-size="17" font-weight="bold" text-anchor="middle" ${FONT}>${k}</text>`;
+  });
+  s+=`</svg>`;
+  return s;
+}
+function unit(P,Q){const dx=Q[0]-P[0],dy=Q[1]-P[1],L=Math.hypot(dx,dy);return [dx/L,dy/L];}
+
+// Бұрыш доғасы (экран координаттарында)
+function arc(P,Q1,Q2,r,label,col){
+  const a1=Math.atan2(Q1[1]-P[1],Q1[0]-P[0]), a2=Math.atan2(Q2[1]-P[1],Q2[0]-P[0]);
+  let d=a2-a1; while(d<=-Math.PI)d+=2*Math.PI; while(d>Math.PI)d-=2*Math.PI;
+  const s=[P[0]+r*Math.cos(a1),P[1]+r*Math.sin(a1)], e=[P[0]+r*Math.cos(a2),P[1]+r*Math.sin(a2)];
+  let out=`<path d="M${s[0]},${s[1]} A${r},${r} 0 0 ${d>0?1:0} ${e[0]},${e[1]}" fill="none" stroke="${col||'#1f3a5f'}" stroke-width="1.4"/>`;
+  if(label){const m=a1+d/2, R=r+15;
+    out+=`<text x="${P[0]+R*Math.cos(m)}" y="${P[1]+R*Math.sin(m)+5}" font-size="15" text-anchor="middle" ${FONT}>${label}</text>`;}
+  return out;
+}
+function tick(P,Q,n){ // тең кесінділер белгісі
+  const m=[(P[0]+Q[0])/2,(P[1]+Q[1])/2], u=unit(P,Q), nrm=[-u[1],u[0]];
+  let s='';
+  for(let i=0;i<(n||1);i++){
+    const off=(i-((n||1)-1)/2)*5, c=[m[0]+u[0]*off,m[1]+u[1]*off];
+    s+=`<line x1="${c[0]-nrm[0]*7}" y1="${c[1]-nrm[1]*7}" x2="${c[0]+nrm[0]*7}" y2="${c[1]+nrm[1]*7}" stroke="#1f3a5f" stroke-width="1.6"/>`;
+  }
+  return s;
+}
+
+// Сызбалық теңбүйірлі үшбұрыш (масштабсыз): L — сол жақ, T — төбе, R — оң жақ
+function triFig(o){
+  const W=360,H=240, L=[50,200], T=[180,45], R=[310,200], M=[180,200];
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
+  if(o.extBase) s+=`<line x1="${R[0]}" y1="${R[1]}" x2="${R[0]+45}" y2="${R[1]}" stroke="#1f3a5f" stroke-width="1.8"/>`;
+  if(o.extApex){const u=unit(L,T); s+=`<line x1="${T[0]}" y1="${T[1]}" x2="${T[0]+u[0]*42}" y2="${T[1]+u[1]*42}" stroke="#1f3a5f" stroke-width="1.8"/>`;}
+  s+=`<polygon points="${L} ${T} ${R}" fill="rgba(31,58,95,0.06)" stroke="#1f3a5f" stroke-width="2.2"/>`;
+  if(o.mid){
+    s+=`<line x1="${T[0]}" y1="${T[1]}" x2="${M[0]}" y2="${M[1]}" stroke="#1f3a5f" stroke-width="1.6" stroke-dasharray="6 4"/>`;
+    s+=`<circle cx="${M[0]}" cy="${M[1]}" r="3.4" fill="#1f3a5f"/>`;
+    s+=`<text x="${M[0]}" y="${M[1]+24}" font-size="17" font-weight="bold" text-anchor="middle" ${FONT}>${o.mid}</text>`;
+    if(o.midTicks){s+=tick(L,M,2)+tick(M,R,2);}
+  }
+  if(o.ticks!==false){s+=tick(L,T,1)+tick(T,R,1);}
+  if(o.aL) s+=arc(L,R,T,26,o.aL);
+  if(o.aR) s+=arc(R,T,L,26,o.aR);
+  if(o.aT && o.mid){ s+=arc(T,L,R,24,""); s+=`<text x="${T[0]+26}" y="${T[1]+48}" font-size="15" ${FONT}>${o.aT}</text>`; }
+  else if(o.aT) s+=arc(T,L,R,24,o.aT);
+  if(o.aTL) s+=arc(T,L,M,30,o.aTL);
+  if(o.extBase) s+=arc(R,[R[0]+40,R[1]],T,20,o.extBase);
+  if(o.extApex){const u=unit(L,T); s+=arc(T,[T[0]+u[0]*40,T[1]+u[1]*40],R,18,o.extApex);}
+  s+=`<text x="${L[0]-14}" y="${L[1]+20}" font-size="18" font-weight="bold" text-anchor="middle" ${FONT}>${o.n[0]}</text>`;
+  s+=`<text x="${o.extApex?T[0]-18:T[0]}" y="${T[1]-12}" font-size="18" font-weight="bold" text-anchor="middle" ${FONT}>${o.n[1]}</text>`;
+  s+=`<text x="${R[0]+14}" y="${R[1]+20}" font-size="18" font-weight="bold" text-anchor="middle" ${FONT}>${o.n[2]}</text>`;
+  s+=`</svg>`;
+  return s;
+}
+
+/* ===================== СҰРАҚТАР ===================== */
+const NOTE = '<div class="hint">Сызба масштабсыз берілген.</div>';
+const VARIANTS = {
+ "1":[
+  {t:"mc", q:"Қандай үшбұрыш <b>теңбүйірлі</b> үшбұрыш деп аталады?",
+   o:["Екі қабырғасы тең үшбұрыш","Барлық бұрыштары сүйір үшбұрыш","Үш қабырғасы әртүрлі үшбұрыш","Бір бұрышы доғал үшбұрыш"], a:0},
+  {t:"mc", q:"ABC үшбұрышында AB = BC, ∠A = 50°. ∠C бұрышын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],aL:"50°",aR:"?"})+NOTE, o:["50°","80°","65°","130°"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың төбесіндегі бұрышы 40°. Табанындағы бұрышын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],aT:"40°",aL:"?"})+NOTE, o:["70°","140°","40°","50°"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың табанына жүргізілген биіктігі туралы қай тұжырым дұрыс?",
+   o:["Ол әрі медиана, әрі биссектриса болады","Ол тек медиана болады","Ол тек биссектриса болады","Ол әрқашан бүйір қабырғаға тең"], a:0},
+  {t:"mc", q:"ABC теңбүйірлі үшбұрышында AB = BC, BD – биссектриса, AC = 12 см. AD кесіндісінің ұзындығын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],mid:"D"})+NOTE, o:["6 см","12 см","4 см","24 см"], a:0},
+  {t:"mc", q:"ABC үшбұрышында ∠A = ∠C = 55°, AB = 8 см. BC қабырғасының ұзындығын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],aL:"55°",aR:"55°",ticks:false})+NOTE, o:["8 см","4 см","16 см","55 см"], a:0},
+  {t:"mc", q:"Координаталық жазықтықта A(1; 1), B(4; 7), C(7; 1) нүктелері берілген, AB = BC. BH – табанға жүргізілген биіктік. H нүктесінің координаталарын табыңыз.",
+   f:()=>gridFig({w:8,h:8,pts:{A:[1,1],B:[4,7],C:[7,1],H:[4,1]},poly:["A","B","C"],dash:[["B","H"]],right:[["H","C","B"]],lab:{H:[0,-1]}}),
+   o:["(4; 1)","(4; 7)","(1; 4)","(7; 4)"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың периметрі 30 см, табаны 8 см. Бүйір қабырғасын табыңыз.",
+   o:["11 см","22 см","19 см","15 см"], a:0},
+  {t:"num", q:"ABC теңбүйірлі үшбұрышында AB = BC = 5 бірлік. Тордан AC табанының ұзындығын анықтап, үшбұрыштың периметрін табыңыз (1 тор көзі = 1 бірлік).",
+   f:()=>gridFig({w:8,h:6,pts:{A:[1,1],B:[4,5],C:[7,1]},poly:["A","B","C"]}), a:16, unit:"бірлік"},
+  {t:"num", q:"Теңбүйірлі үшбұрыштың табанындағы бұрышқа сыбайлас сыртқы бұрышы 110°. Үшбұрыштың төбесіндегі бұрышын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],extBase:"110°",aT:"?"})+NOTE, a:40, unit:"градус"}
+ ],
+ "2":[
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың тең қабырғалары қалай аталады?",
+   o:["Бүйір қабырғалары","Табаны","Гипотенуза","Катеттер"], a:0},
+  {t:"mc", q:"MNK үшбұрышында MN = NK, ∠M = 65°. ∠K бұрышын табыңыз.",
+   f:()=>triFig({n:["M","N","K"],aL:"65°",aR:"?"})+NOTE, o:["65°","50°","115°","25°"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың табанындағы бұрышы 35°. Төбесіндегі бұрышын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],aL:"35°",aT:"?"})+NOTE, o:["110°","145°","35°","70°"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың табанындағы бұрыштары туралы қай тұжырым дұрыс?",
+   o:["Олар өзара тең","Олардың қосындысы әрқашан 90°","Олар әрқашан 60°-қа тең","Бірі екіншісінен екі есе үлкен"], a:0},
+  {t:"mc", q:"MNK теңбүйірлі үшбұрышында MN = NK, NP – табанға жүргізілген медиана, ∠MNK = 80°. ∠MNP бұрышын табыңыз.",
+   f:()=>triFig({n:["M","N","K"],mid:"P",midTicks:true,aT:"80°"})+NOTE, o:["40°","80°","50°","90°"], a:0},
+  {t:"mc", q:"DEF үшбұрышында ∠D = ∠F = 70°, DE = 9 см. EF қабырғасының ұзындығын табыңыз.",
+   f:()=>triFig({n:["D","E","F"],aL:"70°",aR:"70°",ticks:false})+NOTE, o:["9 см","18 см","4,5 см","70 см"], a:0},
+  {t:"mc", q:"Координаталық жазықтықта A(1; 4), B(7; 1), C(7; 7) нүктелері берілген, AB = AC. AH – BC табанына жүргізілген биіктік. H нүктесінің координаталарын табыңыз.",
+   f:()=>gridFig({w:8,h:8,pts:{A:[1,4],B:[7,1],C:[7,7],H:[7,4]},poly:["A","B","C"],dash:[["A","H"]],right:[["H","A","C"]],lab:{H:[1,0]}}),
+   o:["(7; 4)","(4; 4)","(7; 1)","(1; 4)"], a:0},
+  {t:"mc", q:"Теңбүйірлі үшбұрыштың периметрі 40 см, бүйір қабырғасы 13 см. Табанын табыңыз.",
+   o:["14 см","27 см","13 см","26 см"], a:0},
+  {t:"num", q:"MNK теңбүйірлі үшбұрышында MN = NK = 5 бірлік. Тордан MK табанының ұзындығын анықтап, үшбұрыштың периметрін табыңыз (1 тор көзі = 1 бірлік).",
+   f:()=>gridFig({w:10,h:6,pts:{M:[1,2],N:[5,5],K:[9,2]},poly:["M","N","K"]}), a:18, unit:"бірлік"},
+  {t:"num", q:"Теңбүйірлі үшбұрыштың төбесіндегі бұрышқа сыбайлас сыртқы бұрышы 100°. Үшбұрыштың табанындағы бұрышын табыңыз.",
+   f:()=>triFig({n:["A","B","C"],extApex:"100°",aR:"?"})+NOTE, a:50, unit:"градус"}
+ ]
+};
+
+/* ===================== ЛОГИКА ===================== */
+const $=id=>document.getElementById(id);
+const LETTERS=["A","B","C","D"];
+let st={fio:"",cls:"",variant:"",qs:[],i:0,answers:[],blur:0,running:false,deadline:0,timerId:null,startedAt:null};
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function checkStart(){
+  $("btnStart").disabled=!($("fio").value.trim().length>=3 && $("cls").value && $("variant").value);
+}
+["fio","cls","variant"].forEach(id=>{$(id).addEventListener("input",checkStart);$(id).addEventListener("change",checkStart);});
+
+$("btnStart").onclick=()=>{
+  st.fio=$("fio").value.trim().replace(/\s+/g," ");
+  st.cls=$("cls").value; st.variant=$("variant").value;
+  // әр жауап нұсқасының ретін араластыру
+  st.qs=VARIANTS[st.variant].map(q=>{
+    if(q.t!=="mc") return q;
+    const order=shuffle(q.o.map((_,k)=>k));
+    return Object.assign({},q,{o:order.map(k=>q.o[k]),a:order.indexOf(q.a)});
+  });
+  st.answers=new Array(10).fill(null);
+  st.i=0; st.blur=0; st.running=true; st.startedAt=new Date();
+  $("start").classList.add("hidden"); $("quiz").classList.remove("hidden");
+  render();
+};
+
+function render(){
+  const q=st.qs[st.i];
+  $("qcount").textContent=`Сұрақ ${st.i+1} / 10`;
+  $("bar").style.width=(st.i/10*100)+"%";
+  let h=`<p class="qtext"><span class="num">${st.i+1}.</span> ${q.q}</p>`;
+  if(q.f) h+=`<div class="fig">${q.f()}</div>`;
+  if(q.t==="mc"){
+    h+=`<ul class="opts">`+q.o.map((o,k)=>`<li><label><input type="radio" name="opt" value="${k}"><span><span class="letter">${LETTERS[k]})</span> ${o}</span></label></li>`).join("")+`</ul>`;
+  }else{
+    h+=`<div class="numin"><input type="text" id="numAns" inputmode="decimal" autocomplete="off" placeholder="Жауапты санмен жазыңыз"><span>${q.unit||""}</span></div>
+        <div class="hint">Тек санды енгізіңіз (өлшем бірлігін жазбаңыз).</div>`;
+  }
+  $("qbody").innerHTML=h;
+  $("btnNext").disabled=true;
+  $("btnNext").textContent= st.i===9 ? "Аяқтау" : "Келесі";
+  if(q.t==="mc"){
+    document.querySelectorAll('input[name=opt]').forEach(r=>r.addEventListener("change",()=>{
+      document.querySelectorAll('.opts label').forEach(l=>l.classList.remove("sel"));
+      r.closest("label").classList.add("sel");
+      $("btnNext").disabled=false;
+    }));
+  }else{
+    const inp=$("numAns");
+    inp.addEventListener("input",()=>{
+      inp.value=inp.value.replace(/[^0-9.,\-]/g,"");
+      $("btnNext").disabled=inp.value.trim()==="";
+    });
+    inp.focus();
+  }
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(st.timerId);
+  st.deadline=Date.now()+TIME_PER_Q*1000;
+  tickTimer();
+  st.timerId=setInterval(tickTimer,250);
+}
+function tickTimer(){
+  const left=Math.max(0,Math.round((st.deadline-Date.now())/1000));
+  const m=String(Math.floor(left/60)).padStart(2,"0"), s=String(left%60).padStart(2,"0");
+  $("timer").textContent=`${m}:${s}`;
+  $("timer").classList.toggle("low",left<=30);
+  if(left<=0){clearInterval(st.timerId); saveAnswer(); next();}
+}
+
+function saveAnswer(){
+  const q=st.qs[st.i];
+  if(q.t==="mc"){
+    const r=document.querySelector('input[name=opt]:checked');
+    st.answers[st.i]= r? Number(r.value) : null;
+  }else{
+    const v=($("numAns")||{}).value;
+    st.answers[st.i]= (v && v.trim()!=="") ? v.trim() : null;
+  }
+}
+$("btnNext").onclick=()=>{clearInterval(st.timerId); saveAnswer(); next();};
+
+function next(){
+  if(st.i<9){st.i++; render();} else finish();
+}
+
+/* Вкладканы бақылау */
+document.addEventListener("visibilitychange",()=>{
+  if(!st.running) return;
+  if(document.hidden){ st.blur++; }
+  else { $("warnCount").textContent=st.blur; $("warn").classList.remove("hidden"); }
+});
+$("warnOk").onclick=()=>$("warn").classList.add("hidden");
+window.addEventListener("beforeunload",e=>{ if(st.running){e.preventDefault(); e.returnValue="";} });
+
+function isCorrect(q,ans){
+  if(ans===null) return false;
+  if(q.t==="mc") return ans===q.a;
+  const n=parseFloat(String(ans).replace(",","."));
+  return !isNaN(n) && Math.abs(n-q.a)<1e-9;
+}
+
+function finish(){
+  st.running=false; clearInterval(st.timerId);
+  $("warn").classList.add("hidden");
+  const marks=st.qs.map((q,k)=>isCorrect(q,st.answers[k]));
+  const raw=marks.filter(Boolean).length;
+  const penalty=st.blur>0?1:0;
+  const score=Math.max(0,raw-penalty);
+
+  // жергілікті өту саны
+  const key="izotest7_"+st.cls+"_"+st.fio.toLowerCase();
+  let attempts=1; try{attempts=(parseInt(localStorage.getItem(key)||"0",10)||0)+1; localStorage.setItem(key,attempts);}catch(e){}
+
+  $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
+  $("rname").textContent=`${st.fio}, ${st.cls} сынып, ${st.variant}-нұсқа`;
+  $("rscore").textContent=`${score} / 10`;
+  $("rnote").innerHTML = penalty
+    ? `Дұрыс жауаптар: ${raw}. Бетті жиыстыру саны: ${st.blur} — баға 1 балға төмендетілді.`
+    : `Дұрыс жауаптар: ${raw}. Бетті жиыстырған жоқсыз.`;
+  let t="<tr><th>Сұрақ</th>"+marks.map((_,k)=>`<th>${k+1}</th>`).join("")+"</tr><tr><td>Нәтиже</td>"+
+        marks.map(m=>m?'<td class="ok">✓</td>':'<td class="bad">✗</td>').join("")+"</tr>";
+  $("rtable").innerHTML=t;
+
+  const detail=st.qs.map((q,k)=>{
+    const a=st.answers[k];
+    const txt= a===null ? "—" : (q.t==="mc" ? q.o[a] : a);
+    return `${k+1}) ${txt} ${marks[k]?"✓":"✗"}`;
+  }).join("; ");
+
+  const data={
+    fio:st.fio, cls:st.cls, variant:st.variant+"-нұсқа",
+    score:score, max:10, raw:raw, penalty:penalty,
+    blurred: st.blur>0 ? "Иә" : "Жоқ", blurCount:st.blur,
+    localAttempts:attempts, details:detail,
+    started: st.startedAt.toLocaleString("ru-RU"),
+    topic:"Теңбүйірлі үшбұрыш және оның қасиеттері (7.1.1.23)"
+  };
+  sendResult(data);
+}
+
+function sendResult(data){
+  if(!SCRIPT_URL || SCRIPT_URL.indexOf("http")!==0){
+    $("rstatus").textContent="Apps Script URL-і орнатылмаған — нәтиже кестеге жіберілмеді.";
+    return;
+  }
+  fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)})
+    .then(()=>{$("rstatus").textContent="Нәтиже мұғалімге жіберілді. Бетті жаба аласыз.";})
+    .catch(()=>{$("rstatus").textContent="Нәтижені жіберу мүмкін болмады. Интернетті тексеріп, мұғалімге хабарлаңыз.";});
+}
+</script>
+</body>
+</html>
